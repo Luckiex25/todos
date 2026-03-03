@@ -13,11 +13,11 @@
       <div class="col">
         {% if todo %}
         <a href="#" class="btn btn-outline-success float-end disabled">
-          New Todo
+          <i class="bi bi-card-checklist"></i> New Todo
         </a>
         {% else %}
         <a href="{{url_for('todo.new_todo')}}" class="btn btn-outline-success float-end">
-          New Todo
+          <i class="bi bi-card-checklist"></i> New Todo
         </a>
         {% endif %}
         
@@ -43,7 +43,13 @@
               </div>
           {% else %}
               {{form.task(class='form-control')}}
-              {{form.submit(class='btn btn-outline-success')}}
+              {% if todo %}
+                  {{form.submit(class='btn btn-outline-success')}}
+              {% else %}
+                  {{form.submit(class='btn btn-outline-success disabled')}}
+              {% endif %}
+              
+              
           {% endif %}
           
         </div>

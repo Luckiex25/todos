@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container mt-3">
+  <div class="container mt-3 mb-3">
     <h2>{{title}}</h2>
     <hr>
     <div class="card">
@@ -13,7 +13,7 @@
         <h4>{{title}}</h4>
       </div>
       <div class="card-body">
-        <img width="10%" src="{{url_for('static', filename='img/' + avatar_pic)}}">
+        <img width="10%" src="{{url_for('user.static', filename='img/' + avatar_pic)}}">
         <hr>
         <form action="" method="post" novalidate class="row g-3" 
         enctype="multipart/form-data">

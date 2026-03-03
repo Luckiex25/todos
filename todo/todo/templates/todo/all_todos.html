@@ -25,21 +25,29 @@
             </thead>
             <tbody>
               <h4>Number of Tasks: {{tasks|length}}</h4>
-              {% for task in tasks %}
-                <tr>
-                  <td>{{loop.index}}</td>
-                  <td>{{task.task}}</td>
-                  <td>{{task.todo.created_at}}</td>
-                  <td class="text-center">
-                    {% if task.completed %}
-                      <span class="text-success">completed</span>
-                    {% else %}
-                    <span class="text-danger">uncomplete</span>
-                    {% endif %}
-                    
-                  </td>
+              {% if tasks %}
+                  {% for task in tasks %}
+                    <tr>
+                      <td>{{loop.index}}</td>
+                      <td>{{task.task}}</td>
+                      <td>{{task.todo.created_at}}</td>
+                      <td class="text-center">
+                        {% if task.completed %}
+                          <span class="text-success">completed</span>
+                        {% else %}
+                        <span class="text-danger">uncomplete</span>
+                        {% endif %}
+                        
+                      </td>
+                    </tr>
+                  {% endfor %}
+              {% else %}
+                  <tr>
+                  <td colspan="4" class="text-center text-danger">No Task!</td>
                 </tr>
-              {% endfor %}
+              {% endif %}
+              
+              
               
             </tbody>
           </table>

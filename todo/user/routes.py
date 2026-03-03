@@ -6,7 +6,7 @@ from todo.forms import UpdateAccountForm, LoginForm, RegisterForm
 import os, secrets
 from PIL import Image
 
-user_bp = Blueprint('user', __name__, template_folder='templates')
+user_bp = Blueprint('user', __name__, template_folder='templates', static_folder='static')
 
 @user_bp.route('/')
 def index():
@@ -24,7 +24,7 @@ def register():
 
     db.session.add(user)
     db.session.commit()
-
+    flash('Register successful!', 'success')
     return redirect(url_for('user.login'))
   
   return render_template('user/register.html', title='Register Page', form=form)
@@ -56,7 +56,7 @@ def save_avatar(form_avatar):
   avatar_fn = random_hex + ext
 
   avatar_path = os.path.join(user_bp.root_path, 'static/img', avatar_fn)
-
+  # print(user_bp.root_path)
   img_size = (256, 256)
   img = Image.open(form_avatar)
   img.thumbnail(img_size)
@@ -78,6 +78,9 @@ def account():
       current_user.avatar = avatar
     current_user.fullname = form.fullname.data
     db.session.commit()
+    flash('Update account successful!', 'success')
+
     return redirect(url_for('user.account'))
   avatar_pic = current_user.avatar
+
   return render_template('user/account.html', title='Account Info Page', form=form, avatar_pic=avatar_pic)

@@ -3,6 +3,7 @@ from todo.models import Todo, Task, User
 from flask_login import current_user, login_required
 from todo.forms import TaskForm
 from todo.extensions import db, bcrypt
+from datetime import date
 
 todo_bp = Blueprint('todo', __name__, template_folder='templates')
 
@@ -18,7 +19,7 @@ def todo_today():
       tk = Task(task=task, todo=todo)
       db.session.add(tk)
       db.session.commit()
-      return redirect(url_for('todo_today'))
+      return redirect(url_for('todo.todo_today'))
   else:
     tasks = None
   
@@ -31,7 +32,7 @@ def new_todo():
   db.session.add(todo)
   db.session.commit()
 
-  return redirect(url_for('todo_today'))
+  return redirect(url_for('todo.todo_today'))
 
 @todo_bp.route('/<int:id>/task_completed')
 @login_required
@@ -40,7 +41,7 @@ def task_completed(id):
   task.completed = True
   db.session.commit()
 
-  return redirect(url_for('todo_today'))
+  return redirect(url_for('todo.todo_today'))
 
 @todo_bp.route('/all_todos')
 @login_required

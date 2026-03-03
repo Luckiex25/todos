@@ -20,7 +20,7 @@ def create_app():
   login_manager.login_message_category = 'warning'
 
   app.register_blueprint(core_bp, url_prefix='/')
-  app.register_blueprint(user_bp, url_prefix='/user')
+  app.register_blueprint(user_bp, url_prefix='/user' )
   app.register_blueprint(todo_bp, url_prefix='/todo')
 
   return app
